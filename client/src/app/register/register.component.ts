@@ -1,7 +1,7 @@
 // Importing required dependencies and modules
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { AccountService } from '../_services/account.service';
-
+import {ToastrService} from 'ngx-toastr';
 // Declaring component metadata
 @Component({
   selector: 'app-register', // Element selector used in HTML templates
@@ -17,7 +17,7 @@ export class RegisterComponent implements OnInit {
   model: any = {};
 
   // Constructor method
-  constructor(private accountService: AccountService){}
+  constructor(private accountService: AccountService, private toastr: ToastrService){}
 
   // ngOnInit method of the Angular component lifecycle hook
   ngOnInit(): void {}
@@ -29,6 +29,14 @@ export class RegisterComponent implements OnInit {
       this.cancel();
     }, error => {
       console.log(error);
+      this.toastr.error(error.error, 'Error', {
+        //closeButton: true,
+       // positionClass: 'toast-top-right',
+        progressBar: true,
+        timeOut: 2000,
+        extendedTimeOut: 2000,
+        toastClass: 'my-error-class'
+      });
     })
   }
 
