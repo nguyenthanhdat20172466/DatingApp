@@ -26,3 +26,7 @@
 - Adding a bootstrap theme
 - Using Angular route guards
 - Using a Shared Module
+#Sumary 7
+- API Middleware
+- Angular Interceptors
+- Troubleshooting exceptions

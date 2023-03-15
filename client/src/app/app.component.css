@@ -1,0 +1,4 @@
+.bg-secondary {
+  --bs-bg-opacity: 1;
+  background-color: pink!important;
+}

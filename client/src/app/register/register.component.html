@@ -1,7 +1,8 @@
+
 <form #registerForm="ngForm" (ngSubmit)="register()" autocomplete="off">
 
   <h2 class="text-center text-primary">Sign up</h2>
-  <!-- <hr> -->
+
   <div class="mb-3">
     <input type="text"
     class="form-control"
@@ -25,4 +26,67 @@
     <button class="btn btn-success me-2 my-class-error"  type="submit">Register</button>
     <button class="btn btn-danger mr-2 " type="button" (click)="cancel()">Cancel</button>
   </div>
-  </form>
+</form>
+
+
+<!-- <div class="topContainer">
+  <div class="main">
+    <input type="checkbox" id="chk" aria-hidden="true">
+    <div class="signup">
+      <form>
+        <label for="chk" aria-hidden="true">Sign up</label>
+        <input type="text" name="txt" placeholder="User name" [(ngModel)]="signupObj.userName">
+        <input type="email" name="email" placeholder="Email" [(ngModel)]="signupObj.email">
+        <input type="password" name="pswd" placeholder="Password" [(ngModel)]="signupObj.password">
+        <button (click)="onSignUp()">Sign up</button>
+      </form>
+    </div>
+
+    <div class="login">
+      <form>
+        <label for="chk" aria-hidden="true">Login</label>
+        <input type="text" name="userNmae" placeholder="User Name"  [(ngModel)]="loginObj.EmailId">
+        <input type="password" name="psswdord" placeholder="Password"  [(ngModel)]="loginObj.Password">
+        <button (click)="onLogin()">Login</button>
+      </form>
+    </div>
+  </div>
+</div> -->
+
+<!-- <div class="container">
+	<div class="screen">
+		<div class="screen__content">
+			<form #registerForm="ngForm" (ngSubmit)="register()" autocomplete="off" class="login">
+        <h2 class="text-center text-primary">Sign up</h2>
+				<div class="login__field">
+					<i class="login__icon fas fa-user"></i>
+          <input type="text"
+          class="login__input"
+          name="username"
+          [(ngModel)] = "model.username"
+          placeholder="Username"
+          >
+				</div>
+				<div class="login__field">
+					<i class="login__icon fas fa-lock"></i>
+           <input type="password"
+          class="login__input"
+          name="password"
+          [(ngModel)] = "model.password"
+          placeholder="Password"
+          >
+				</div>
+        <div class="text-center">
+          <button class="button login__submit"  type="submit">Register</button>
+          <button class="button login__submit " type="button" (click)="cancel()">Cancel</button>
+        </div>
+			</form>
+		</div>
+		<div class="screen__background">
+			<span class="screen__background__shape screen__background__shape4"></span>
+			<span class="screen__background__shape screen__background__shape3"></span>
+			<span class="screen__background__shape screen__background__shape2"></span>
+			<span class="screen__background__shape screen__background__shape1"></span>
+		</div>
+	</div>
+</div> -->

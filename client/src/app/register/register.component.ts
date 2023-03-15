@@ -29,14 +29,7 @@ export class RegisterComponent implements OnInit {
       this.cancel();
     }, error => {
       console.log(error);
-      this.toastr.error(error.error, 'Error', {
-        //closeButton: true,
-       // positionClass: 'toast-top-right',
-        progressBar: true,
-        timeOut: 2000,
-        extendedTimeOut: 2000,
-        toastClass: 'my-error-class'
-      });
+      this.toastr.error(error.error);
     })
   }
 

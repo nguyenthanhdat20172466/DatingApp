@@ -1,0 +1,13 @@
+.navbar-brand{
+  font-family: 'Lobster', cursive
+
+}
+.font-color{
+  color: black!important;
+}
+.bg-secondary {
+  --bs-bg-opacity: 1;
+  background-color: pink!important;
+}
+
+
