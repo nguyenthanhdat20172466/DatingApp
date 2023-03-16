@@ -31,4 +31,9 @@
 - Angular Interceptors
 - Troubleshooting exceptions
 # Sumary 8
-- 
+- Entity Framework relationships
+- Entity Framework Coventions
+- Seeding data
+- The repository pattern
+- Using Automapper![image](https://user-images.githubusercontent.com/84734396/225553669-53cbbf53-40ed-475f-8759-fc0429482f8e.png)
+
