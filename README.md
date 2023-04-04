@@ -21,14 +21,18 @@
 - Using Angular structural directives to conditionally display elements on a page
 - Component communication from parent to child
 - Component communication from child to parent
-#Summary 6
+# Summary 6
 - Angular routing
 - Adding a bootstrap theme
 - Using Angular route guards
 - Using a Shared Module
-#Sumary 7
+# Sumary 7
 - API Middleware
 - Angular Interceptors
 - Troubleshooting exceptions
-#Sumary 8
-- 
+# Sumary 8
+- Entity Framework relationships
+- Entity Framework Coventions
+- Seeding data
+- The repository pattern
+- Using Automapper
