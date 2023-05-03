@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using API.DTOs;
 using API.Entities;
 using API.Interfaces;
@@ -13,9 +9,9 @@ namespace API.Data.Repository
 {
     public class UserRepository : IUserRepository
     {
-         private readonly DataContext _context;
-         private readonly IMapper _mapper;
-       //private readonly IMapper _mapper;
+        private readonly DataContext _context;
+        private readonly IMapper _mapper;
+        //private readonly IMapper _mapper;
         public UserRepository(DataContext context, IMapper mapper)
         {
             //_mapper = mapper;
@@ -25,10 +21,10 @@ namespace API.Data.Repository
 
         public async Task<MemberDto> GetMemberAsync(string username)
         {
-           return await _context.Users
-           .Where(x => x.UserName == username)
-           .ProjectTo<MemberDto>(_mapper.ConfigurationProvider)
-           .SingleOrDefaultAsync();
+            return await _context.Users
+            .Where(x => x.UserName == username)
+            .ProjectTo<MemberDto>(_mapper.ConfigurationProvider)
+            .SingleOrDefaultAsync();
         }
 
         public async Task<MemberDto> GetMemberByIdAsync(int id)
@@ -48,19 +44,19 @@ namespace API.Data.Repository
 
         public async Task<AppUser> GetUserByIdAsync(int id)
         {
-            var user = await _context.Users.Include(p=>p.Photos).SingleOrDefaultAsync(x => x.Id == id);
+            var user = await _context.Users.Include(p => p.Photos).SingleOrDefaultAsync(x => x.Id == id);
             return user;
         }
 
         public async Task<AppUser> GetUserByUsernameAsync(string username)
         {
-            var user = await _context.Users.Include(p=>p.Photos).SingleOrDefaultAsync(x => x.UserName == username);
+            var user = await _context.Users.Include(p => p.Photos).SingleOrDefaultAsync(x => x.UserName == username);
             return user;
         }
 
         public async Task<IEnumerable<AppUser>> GetUsersAsync()
         {
-            return await _context.Users.Include(p=>p.Photos).ToListAsync();
+            return await _context.Users.Include(p => p.Photos).ToListAsync();
         }
 
         public async Task<bool> SaveAllAsync()

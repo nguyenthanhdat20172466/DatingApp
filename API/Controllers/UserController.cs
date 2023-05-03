@@ -1,16 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using API.Data;
-using API.Entities;
-using Microsoft.AspNetCore.Mvc;
-using System.Linq;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Authorization;
-using API.Interfaces;
 using API.DTOs;
+using API.Interfaces;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace API.Controllers
 {
@@ -18,10 +11,10 @@ namespace API.Controllers
     [ApiController]
     [Route("api/[controller]")]
     [Authorize]
-    public class UserController: BaseApiController
+    public class UserController : BaseApiController
     {
         private readonly IUserRepository _userRepository;
-         private readonly IMapper _mapper;
+        private readonly IMapper _mapper;
         public UserController(IUserRepository userRepository, IMapper mapper)
         {
             _userRepository = userRepository;
@@ -51,8 +44,35 @@ namespace API.Controllers
         {
             var users = await _userRepository.GetMemberAsync(username);
             return users;
-            
+
         }
+
+        [HttpPut]
+        public async Task<ActionResult> UpdateUser(MemberUpdateDto memberUpdateDto)
+        {
+            var username = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var user = await _userRepository.GetUserByUsernameAsync(username);
+
+            _mapper.Map(memberUpdateDto, user);
+
+            _userRepository.Update(user);
+
+            if (await _userRepository.SaveAllAsync()) return NoContent();
+
+            return BadRequest("Failed to update user");
+        }
+        [HttpGet]
+        [Route("api/myendpoint")]
+        public async Task<IActionResult> MyEndpoint()
+        {
+            var username = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var user = await _userRepository.GetUserByUsernameAsync(username);
+            // do something with the user name
+            return Ok(user);
+        }
+
+
+
     }
 
 }
