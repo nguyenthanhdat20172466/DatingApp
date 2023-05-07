@@ -38,8 +38,14 @@ builder.Services.AddCors();
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddTransient<IUserRepository, UserRepository>();
+builder.Services.AddTransient<IPhotoService, PhotoService>();
+
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+builder.Services.Configure<CloudinarySettings>(builder.Configuration.GetSection("CloudinarySettings"));
 //builder.Services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
+builder.Services.AddAuthentication("Cookies")
+    .AddCookie("Cookies");
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
 {
     options.TokenValidationParameters = new TokenValidationParameters
@@ -76,19 +82,19 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-using var scope = app.Services.CreateScope();
-var services = scope.ServiceProvider;
-try
-{
-    var context = services.GetRequiredService<DataContext>();
-    await context.Database.MigrateAsync();
-    await Seed.SeedUsers(context);
-}
+//using var scope = app.Services.CreateScope();
+//var services = scope.ServiceProvider;
+//try
+//{
+//    var context = services.GetRequiredService<DataContext>();
+//    await context.Database.MigrateAsync();
+//    await Seed.SeedUsers(context);
+//}
 
-catch (Exception ex)
-{
-    var logger = services.GetService<ILogger<Program>>();
-    logger.LogError(ex, "An error accurred during migration");
-}
+//catch (Exception ex)
+//{
+//    var logger = services.GetService<ILogger<Program>>();
+//    logger.LogError(ex, "An error accurred during migration");
+//}
 
 app.Run();

@@ -23,8 +23,8 @@ export class AccountService {
       map((response: User) =>{
         const user = response; // Assigns the response to a user variable
         if(user){ // If a user exists in the response
-          localStorage.setItem('user', JSON.stringify(user)); // Stores the user data in local storage
-          this.currenrusserSource.next(user);
+          this.setCurrentUser(user);
+
         }
       })
     );
@@ -35,8 +35,7 @@ register(model: any){
     map((user: User) =>{
 
       if(user){ // If a user exists in the response
-        localStorage.setItem('user', JSON.stringify(user)); // Stores the user data in local storage
-        this.currenrusserSource.next(user);
+        this.setCurrentUser(user);
       }
 
     })
@@ -44,6 +43,7 @@ register(model: any){
 }
 
 setCurrentUser(user: User){
+  localStorage.setItem('user', JSON.stringify(user));
   this.currenrusserSource.next(user);
 }
 
