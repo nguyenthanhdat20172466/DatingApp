@@ -12,5 +12,10 @@ namespace API.Entities
 
         public int AppUserId { get; set; }
         public AppUser AppUser { get; set; }
+
+        public static implicit operator List<object>(Photo v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
