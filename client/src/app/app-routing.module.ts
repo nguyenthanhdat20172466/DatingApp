@@ -13,29 +13,35 @@ import { MemberEditComponent } from './members/member-edit/member-edit.component
 import { PreventUnsavedChangesGuard } from './_guards/prevent-unsaved-changes.guard';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent},
-  {
-    path: '',
-    runGuardsAndResolvers: 'always',
-    canActivate: [AuthGuard],
-    children: [
-      { path: 'members', component: MemberListComponent},
-      { path: 'members/:username', component: MemberDetailComponent},
-      { path: 'member/edit', component: MemberEditComponent, canDeactivate: [PreventUnsavedChangesGuard]},
+  { path: '', component: HomeComponent }, // Route for the home component
 
-      { path: 'lists', component: ListsComponent},
-      { path: 'messages', component: MessagesComponent},
+  {
+    path: '', // Đường dẫn cơ sở cho các tuyến đường được xác thực
+    runGuardsAndResolvers: 'always',
+    canActivate: [AuthGuard], // Route guard to protect the child routes
+    children: [
+      { path: 'members', component: MemberListComponent }, // Route for the member list component
+      { path: 'members/:username', component: MemberDetailComponent }, // Route for the member detail component
+      {
+        path: 'member/edit', // Route for member edit component
+        component: MemberEditComponent,
+        canDeactivate: [PreventUnsavedChangesGuard] // Route guard to prevent unsaved changes
+      },
+
+      { path: 'lists', component: ListsComponent }, // Route for the lists component
+      { path: 'messages', component: MessagesComponent }, // Route for the messages component
     ]
   },
-  {path: 'errors', component: TestErrorsComponent},
-  {path: 'not-found', component: NotFoundComponent},
-  {path: 'server-error', component: ServerErrorComponent},
-  { path: '**', component: HomeComponent, pathMatch: 'full'},
+
+  { path: 'errors', component: TestErrorsComponent }, // Route for the test errors component
+  { path: 'not-found', component: NotFoundComponent }, // Route for the not found component
+  { path: 'server-error', component: ServerErrorComponent }, // Route for the server error component
+  { path: '**', component: HomeComponent, pathMatch: 'full' }, // Wildcard route for handling unknown routes
 
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  imports: [RouterModule.forRoot(routes)], // Configuring the router module with the defined routes
+  exports: [RouterModule] // Exporting the configured router module
 })
 export class AppRoutingModule { }

@@ -23,7 +23,7 @@
 
       <div class="dropdown" *ngIf="(accountService.currentUser$ |async) as user" dropdown>
         <img src="{{user.photoUrl || './assets/user.png'}}" alt="{{user.username}}">
-        <a class="dropdown-toggle text-light font-color" dropdownToggle>Welcome {{user.username | titlecase}}</a>
+        <a class="dropdown-toggle text-light font-color"  style="text-decoration: none" dropdownToggle>Welcome {{user.knownAs | titlecase}}</a>
         <div class="dropdown-menu mt-3" *dropdownMenu="">
           <a routerLink="/member/edit" class="dropdown-item font-color">Edit Profile</a>
           <div class="dropdown-divider"></div>
@@ -42,7 +42,7 @@
             name = "password"
             [(ngModel)]="model.password"
             class="form-control me-2" type="password" placeholder="Password">
-        <button class="btn btn-primary" type="submit">Login</button>
+        <button class="btn btn-primary login" type="submit">Login</button>
       </form>
     </div>
   </div>

@@ -1,0 +1,42 @@
+.reset-button {
+  margin-left: 10px; /* Tùy chỉnh khoảng cách theo ý muốn */
+  background: orangered;
+
+}
+.btn-primary{
+  background: #17a2b8
+}
+
+
+.left-container {
+  display: flex;
+  padding: 20px;
+}
+.right-container{
+  display: flex;
+  padding: 20px;
+
+}
+.but{
+  margin-left: 20px;
+}
+.full-containe {
+  display: flex;
+
+}
+
+.age-from{
+  margin-right: 20px;
+}
+
+
+.form-group {
+  display: flex;
+  align-items: center;
+}
+
+.form-group label {
+  margin-right: 10px;
+}
+
+

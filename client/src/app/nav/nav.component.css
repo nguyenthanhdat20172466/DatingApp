@@ -2,12 +2,12 @@
   font-family: 'Lobster', cursive
 
 }
-.font-color{
-  color: black!important;
-}
+/* .font-color{
+  color: white!important;
+} */
 .bg-secondary {
   --bs-bg-opacity: 1;
-  background-color: pink!important;
+  background-color: orangered!important;
 }
 
 img {
@@ -16,4 +16,7 @@ img {
   display: inline;
 }
 
+.login {
+  background: rgb(47, 157, 66);
+}
 
