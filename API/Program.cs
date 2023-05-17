@@ -37,6 +37,8 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddCors();
 builder.Services.AddScoped<LogUserActivity>();
 builder.Services.AddScoped<ITokenService, TokenService>();
+builder.Services.AddScoped<ILikesRepository, LikesRepository>();
+
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddTransient<IUserRepository, UserRepository>();
 builder.Services.AddTransient<IPhotoService, PhotoService>();
