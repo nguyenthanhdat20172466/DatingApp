@@ -3,6 +3,7 @@ using System;
 using API.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20230518083341_MessegeEntity")]
+    partial class MessegeEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.15");
@@ -76,9 +78,8 @@ namespace API.Data.Migrations
 
             modelBuilder.Entity("API.Entities.Message", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("Id")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Content")
                         .IsRequired()
@@ -90,22 +91,20 @@ namespace API.Data.Migrations
                     b.Property<DateTime?>("MessageSent")
                         .HasColumnType("TEXT");
 
-                    b.Property<bool?>("RecipientDeleted")
+                    b.Property<bool>("RecipientDeleted")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("RecipientId")
-                        .IsRequired()
+                    b.Property<int>("RecipientId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("RecipientUsername")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<bool?>("SenderDeleted")
+                    b.Property<bool>("SenderDeleted")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("SenderId")
-                        .IsRequired()
+                    b.Property<int>("SenderId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("SenderUsername")

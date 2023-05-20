@@ -1,0 +1,16 @@
+.img-circle
+{
+  max-height: 50px;
+}
+
+
+.custom-button {
+  background-color: #FF0000; /* Màu nền (ví dụ: màu đỏ) */
+  color: white; /* Màu chữ (ví dụ: màu trắng) */
+  transition: background-color 0.3s; /* Thời gian chuyển đổi */
+}
+
+
+.custom-button:hover {
+  background-color: #792512; /* Màu nền khi trỏ chuột vào (ví dụ: màu xanh lá cây) */
+}

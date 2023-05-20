@@ -11,6 +11,7 @@ import { MessagesComponent } from './messages/messages.component';
 import { AuthGuard } from './_guards/auth.guard';
 import { MemberEditComponent } from './members/member-edit/member-edit.component';
 import { PreventUnsavedChangesGuard } from './_guards/prevent-unsaved-changes.guard';
+import { MemberDetailedResolver } from './_resolvers/member-detailed.resolver';
 
 const routes: Routes = [
   { path: '', component: HomeComponent }, // Route for the home component
@@ -21,7 +22,7 @@ const routes: Routes = [
     canActivate: [AuthGuard], // Route guard to protect the child routes
     children: [
       { path: 'members', component: MemberListComponent }, // Route for the member list component
-      { path: 'members/:username', component: MemberDetailComponent }, // Route for the member detail component
+      { path: 'members/:username', component: MemberDetailComponent, resolve: {member: MemberDetailedResolver} }, // Route for the member detail component
       {
         path: 'member/edit', // Route for member edit component
         component: MemberEditComponent,
