@@ -4,6 +4,7 @@ import { ReplaySubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { User } from '../_model/user';
 import { environment } from 'src/environments/environment';
+import { UserParams } from '../_model/userParams';
 
 @Injectable({
   providedIn: 'root'
@@ -43,6 +44,9 @@ register(model: any){
 }
 
 setCurrentUser(user: User){
+  user.roles = [];
+  const roles = this.getDecodedToken(user.token).role;
+  Array.isArray(roles) ? user.roles = roles : user.roles.push(roles);
   localStorage.setItem('user', JSON.stringify(user));
   this.currenrusserSource.next(user);
 }
@@ -51,5 +55,9 @@ setCurrentUser(user: User){
   logout(){
     localStorage.removeItem('user');
     this.currenrusserSource.next(null);
+  }
+
+  getDecodedToken(token) {
+    return JSON.parse(atob(token.split('.')[1]));
   }
 }

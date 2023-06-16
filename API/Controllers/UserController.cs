@@ -33,7 +33,7 @@ namespace API.Controllers
             // /var userToReturn = _mapper.Map<IEnumerable<MemberDto>>(users);
             return Ok(users);
         }
-
+        [Authorize(Roles ="Admin")]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<MemberDto>>> GetUsers([FromQuery]UserParams userParams)
         {
@@ -55,14 +55,17 @@ namespace API.Controllers
 
 
         [HttpGet("{id}")]
-        [AllowAnonymous]
+        //[AllowAnonymous]
         public async Task<ActionResult<MemberDto>> GetUserById(int id)
         {
             var users = await _userRepository.GetMemberByIdAsync(id);
             return Ok(users);
         }
+
+        [Authorize(Roles = "Member")]
+
         [HttpGet("/api/user/username/{username}", Name = "GetUser")]
-        [AllowAnonymous]
+        //[AllowAnonymous]
         public async Task<ActionResult<MemberDto>> GetUser(string username)
         {
             var users = await _userRepository.GetMemberAsync(username);

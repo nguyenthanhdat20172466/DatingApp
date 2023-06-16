@@ -11,6 +11,9 @@ using Microsoft.OpenApi.Models;
 using SQLitePCL;
 using System.Text;
 using Swashbuckle.AspNetCore.Filters;
+using API.Entities;
+using API.Extensions;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -49,8 +52,18 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.Configure<CloudinarySettings>(builder.Configuration.GetSection("CloudinarySettings"));
 //builder.Services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
-builder.Services.AddAuthentication("Cookies")
-    .AddCookie("Cookies");
+
+
+// builder.Services.AddIdentityCore<AppUser>(opt =>
+// {
+//     opt.Password.RequireNonAlphanumeric = false;
+// })
+//     .AddRoles<AppRole>()
+//     .AddRoleManager<RoleManager<AppRole>>()
+//     .AddSignInManager<SignInManager<AppUser>>()
+//     .AddRoleValidator<RoleValidator<AppRole>>()
+//     .AddEntityFrameworkStores<DataContext>();
+builder.Services.AddIdentityServices(builder.Configuration);
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
 {
     options.TokenValidationParameters = new TokenValidationParameters
@@ -87,19 +100,21 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-//using var scope = app.Services.CreateScope();
-//var services = scope.ServiceProvider;
-//try
-//{
-//    var context = services.GetRequiredService<DataContext>();
-//    await context.Database.MigrateAsync();
-//    await Seed.SeedUsers(context);
-//}
+using var scope = app.Services.CreateScope();
+var services = scope.ServiceProvider;
+try
+{
+   var context = services.GetRequiredService<DataContext>();
+   var userManager = services.GetRequiredService<UserManager<AppUser>>();
+   var roleManager = services.GetRequiredService<RoleManager<AppRole>>();
+   await context.Database.MigrateAsync();
+   await Seed.SeedUsers(userManager, roleManager);
+}
 
-//catch (Exception ex)
-//{
-//    var logger = services.GetService<ILogger<Program>>();
-//    logger.LogError(ex, "An error accurred during migration");
-//}
+catch (Exception ex)
+{
+   var logger = services.GetService<ILogger<Program>>();
+   logger.LogError(ex, "An error accurred during migration");
+}
 
 app.Run();

@@ -39,6 +39,7 @@ export class MemberListComponent implements OnInit {
   // }
 
   loadMembers() {
+    debugger;
     this.memberService.setUserParams(this.userParams);
     this.memberService.getMembers(this.userParams).
       subscribe(response => {
